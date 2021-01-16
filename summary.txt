@@ -1,0 +1,48 @@
+x
+Contents
+7.2 One-to-One and Onto, Inverse Functions
+397
+One-to-One Functions; One-to-One Functions on Infinite Sets; Application: Hash
+Functions; Onto Functions; Onto Functions on Infinite Sets; Relations between Expo-
+nential and Logarithmic Functions; One-to-One Correspondences; Inverse Functions
+7.3 Composition of Functions
+416
+Definition and Examples; Composition of One-to-One Functions; Composition of
+Onto Functions
+7.4 Cardinality with Applications to Computability
+428
+Definition of Cardinal Equivalence; Countable Sets; The Search for Larger Infinities:
+The Cantor Diagonalization Process; Application: Cardinality and Computability
+Chapter 8 Relations
+442
+8.1 Relations on Sets
+442
+Additional Examples of Relations; The Inverse of a Relation; Directed Graph of a
+Relation; N-ary Relations and Relational Databases
+8.2 Reflexivity, Symmetry, and Transitivity
+449
+Reflexive, Symmetric, and Transitive Properties; Properties of Relations on Infinite
+Sets; The Transitive Closure of a Relation
+8.3 Equivalence Relations
+459
+The Relation Induced by a Partition; Definition of an Equivalence Relation; Equiva-
+lence Classes of an Equivalence Relation
+8.4 Modular Arithmetic with Applications to Cryptography
+478
+Properties of Congruence Modulo n; Modular Arithmetic; Extending the Euclidean
+Algorithm; Finding an Inverse Modulo n; RSA Cryptography; Euclid’s Lemma;
+Fermat’s Little Theorem; Why Does the RSA Cipher Work?; Additional Remarks
+on Number Theory and Cryptography
+8.5 Partial Order Relations
+498
+Antisymmetry; Partial Order Relations; Lexicographic Order; Hasse Diagrams;
+Partially and Totally Ordered Sets; Topological Sorting; An Application; PERT and
+CPM
+Chapter 9 Counting and Probability
+516
+9.1 Introduction
+517
+Definition of Sample Space and Event; Probability in the Equally Likely Case; Count-
+ing the Elements of Lists, Sublists, and One-Dimensional Arrays
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s). 
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.

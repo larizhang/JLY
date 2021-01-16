@@ -4,11 +4,11 @@
 import fitz
 
 def main():
-    print("hello world")
+    page = 15
     filename = input("Enter filename: ")
     doc = fitz.open(filename)
-    output = open(filename[:10] + ".txt", "wb")
-    text = doc[15].getText().encode("utf8")
+    output = open("summary" + ".txt", "wb")
+    text = doc[page].getText().encode("utf8")
     output.write(text)
     output.close()
 
