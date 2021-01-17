@@ -141,9 +141,24 @@ In this chapter we begin with a very simple example of an information retrieval 
     nx_graph = nx.from_numpy_array(sim_mat)
     scores = nx.pagerank(nx_graph)
     ranked_sentences = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)
-    # Extract top 10 sentences as the summary
-    for i in range(10):
-        print("Sentence" + str(i))
-        print(ranked_sentences[i][1])     
+    
+    sum_length = None
+    while not sum_length:
+        try:
+            x = int(input(f"There are {len(sentences)} in this chapter. Please enter how many sentences you want in the summary: "))
+            if x>=1 and x<=len(sentences):
+                sum_length = x
+            else: raise Exception
+        except Exception:
+            print("Invalid number")    
 
+    chapter_sum = chts[chapter-1]
+    output = open("chapter_summary" + ".txt", "wb")
+    title_sum = "Chapter "+ str(chapter_sum.number)+ "Title: "+ chapter_sum.name+str(chapter_sum.pageRange) + "\n"
+    title_sum = bytes(title_sum, 'utf-8')
+    output.write(title_sum)
+    for i in range(sum_length):
+        output.write(bytes("Sentence "+ str(i+1) + "\n","utf-8"))
+        output.write(bytes(ranked_sentences[i][1]+'\n','utf-8'))
+    output.close()
 main()
