@@ -40,7 +40,8 @@ def remove_stopwords(sen):
 
 
 def main():
-    filename = sys.argv[1]
+    #filename = sys.argv[1]
+    filename = "irbookonlinereading.pdf"
     doc = fitz.open(filename)
     pagenum = doc.pageCount
     sample = (floor(2/6*pagenum), floor(3/6*pagenum), floor(4/6*pagenum), floor(5/6*pagenum))
@@ -77,14 +78,20 @@ def main():
         except Exception:
             print("Invalid chapter")
 
+    """
     output = open("string_contents" + ".txt", "wb")
     for page in range(chts[chapter-1].pageRange[0], chts[chapter-1].pageRange[1]+1):
         text = doc[page].getText().encode("utf8")
         output.write(text)
 
     output.close()
-    
+    """
+    output = ""
+    for page in range(chts[chapter-1].pageRange[0]-1, chts[chapter-1].pageRange[1]):
+        text = doc[page].getText()
+        output+=text  
     #to be removed
+
     test_string = """
 The meaning of the term information retrieval can be very broad. Just getting a credit card out of your wallet so that you can type in the card number is a form of information retrieval. However, as an academic field of study, information retrieval might be defined thus:
 
@@ -99,7 +106,7 @@ Information retrieval systems can also be distinguished by the scale at which th
 In this chapter we begin with a very simple example of an information retrieval problem, and introduce the idea of a term-document matrix (Section 1.1 ) and the central inverted index data structure (Section 1.2 ). We will then examine the Boolean retrieval model and how Boolean queries are processed ( and 1.4 ).
 """
     sentences = []
-    sentences = sent_tokenize(test_string)
+    sentences = sent_tokenize(str(output))
     # Extract word vectors
     word_embeddings = {}
     f = open('glove.6B.100d.txt',encoding='utf-8')
@@ -111,7 +118,7 @@ In this chapter we begin with a very simple example of an information retrieval 
     f.close()
     clean_sentences = []
     for s in sentences:
-        temp = s.replace("[^a-zA-Z]", " ")
+        temp = re.sub('[^a-zA-Z]+', ' ', s)
         clean_sentences.append(temp)
     clean_sentences = [s.lower() for s in clean_sentences]
     stop_words = stopwords.words('english') 
@@ -136,6 +143,7 @@ In this chapter we begin with a very simple example of an information retrieval 
     ranked_sentences = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)
     # Extract top 10 sentences as the summary
     for i in range(10):
+        print("Sentence" + str(i))
         print(ranked_sentences[i][1])     
 
 main()
