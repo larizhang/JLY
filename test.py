@@ -16,15 +16,14 @@ class Chapter:
 
         self.number = number
         self.name = name
-        self.pageRange = (pageStart, pageEnd)
-        self.sub = []
+        self.pageRange = [pageStart, pageEnd]
+        # self.sub = []
 
     def __repr__(self):        
         return " ".join(["[Chapter %d]"%self.number, self.name, str(self.pageRange)])
 
 
 def main():
-    page = 15
     filename = sys.argv[1]
     doc = fitz.open(filename)
     pagenum = doc.pageCount
@@ -37,22 +36,36 @@ def main():
     if blankPages==len(sample):
         raise Exception("This pdf is not readable, sorry")
     
-    output = open("summary" + ".txt", "wb")
-    print(doc.get_toc())
-    
     chts = []
     chapter_count=0
     toc = doc.get_toc()
     for n, items in enumerate(toc):
         if items[0]==1 and n < len(toc)-1 and toc[n+1][0]==2: # lvl 1 in document hierarchy AND search for section that has subsections
             chapter_count+=1
+            if chapter_count>=2:
+                chts[-1].pageRange[1] = items[2]-1
             c = Chapter(chapter_count, items[1], items[2])
             chts.append(c)
+        if chapter_count>=1 and items[0]==1: # finds the end of last chapter
+            chts[-1].pageRange[1] = items[2]-1
+    
     [print(c) for c in chts]
 
+    chapter = None
+    while not chapter:
+        try:
+            x = int(input(f"Please enter a chapter (1-{chapter_count}): "))
+            if x>=1 and x<=chapter_count:
+                chapter = x
+            else: raise Exception
+        except Exception:
+            print("Invalid chapter")
 
-    # text = doc[page].getText().encode("utf8")
-    # output.write(text)
+    output = open("string_contents" + ".txt", "wb")
+    for page in range(chts[chapter-1].pageRange[0], chts[chapter-1].pageRange[1]+1):
+        text = doc[page].getText().encode("utf8")
+        output.write(text)
+
     output.close()
 
 main()
